@@ -4,10 +4,10 @@ public class FrameSupport {
 
     private double frameRate;
 
-    public static int[] stepsBetween(int a, int b, int frameRate) {
-        int sub = b - a;
-        int step = sub / frameRate;
-        int[] values = new int[frameRate];
+    public static float[] stepsBetween(float a, float b, int frameRate) {
+        float sub = b - a;
+        float step = sub / frameRate;
+        float[] values = new float[frameRate];
 
         for (int i = 0; i < frameRate; i++) {
             values[i] = a + step;

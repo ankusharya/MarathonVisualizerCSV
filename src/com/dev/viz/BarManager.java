@@ -36,12 +36,12 @@ public class BarManager {
     }
 
     public void constructBars(Table tab) {
-        int seperateX = 10;
-        int seperateY = 10;
-        int width_ = 30;
-        int DEFAULT_HEIGHT = 0;
+        float seperateX = 10;
+        float seperateY = 10;
+        float width_ = 30;
+        float DEFAULT_HEIGHT = 0;
 
-        int[][] datas = new int[this.columns.size()][tab.getRowCount()];
+        float[][] datas = new float[this.columns.size()][tab.getRowCount()];
         this.datasize = tab.getRowCount();
         bars = new ArrayList<Bar>(this.columns.size());
         for (int i = 0; i < tab.getRowCount(); i++) {
@@ -58,35 +58,36 @@ public class BarManager {
     }
 
     public void constructBarsIncremental(Table tab) {
-        int seperateX = 10;
-        int seperateY = 10;
-        int width_ = 30;
-        int DEFAULT_HEIGHT = 0;
-        int frameRate = 32;
+        float seperateX = 10;
+        float seperateY = 10;
+        float width_ = 30;
+        float DEFAULT_HEIGHT = 0;
+        int frameRate = 128;
 
-        int[][][] datas = new int[this.columns.size()][tab.getRowCount()][frameRate];
+        float[][][] datas = new float[this.columns.size()][tab.getRowCount()][frameRate];
         this.datasize = tab.getRowCount();
         bars = new ArrayList<Bar>(this.columns.size());
+        println(tab.getRowCount());
         for (int i = 0; i < tab.getRowCount() - 1; i++) {
             TableRow row = tab.getRow(i);
             TableRow rowNext = tab.getRow(i + 1);
             for (int col = 0; col < this.columns.size(); col++) {
-                int first = row.getInt(col);
-                int second = rowNext.getInt(col);
-                int[] stepIncrease = FrameSupport.stepsBetween(first, second, frameRate);
+                float first = row.getFloat(col);
+                float second = rowNext.getFloat(col);
+                float[] stepIncrease = FrameSupport.stepsBetween(first, second, frameRate);
                 datas[col][i] = stepIncrease;
+                println(stepIncrease);
             }
         }
 
         //finding the heighest number
-        int[] largetNumbers = new int[this.columns.size()];
+        float[] largetNumbers = new float[this.columns.size()];
         for (int col = 0; col < this.columns.size(); col++) {
-            println(datas[col][tab.getRowCount() - 1][0]);
+            println(datas[col][tab.getRowCount() - 2][frameRate - 1]);
             largetNumbers[col] = datas[col][tab.getRowCount() - 3][frameRate - 1];
         }
 
-        int largestNumber = Common.greatestNumber(largetNumbers);
-        println(largetNumbers);
+        float largestNumber = Common.greatestNumber(largetNumbers);
 
         // reset the numbers according to the window size
         for (int col = 0; col < this.columns.size(); col++) {

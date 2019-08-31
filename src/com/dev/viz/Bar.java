@@ -2,19 +2,17 @@ package com.dev.viz;
 
 import processing.core.PApplet;
 
-import static processing.core.PApplet.println;
-
 public class Bar{
-    public int x;
-    public int y;
-    public int width;
-    public int height;
-    public int[] data;
-    public int[][] dataInc;
+    public float x;
+    public float y;
+    public float width;
+    public float height;
+    public float[] data;
+    public float[][] dataInc;
     PApplet parent;
 
 
-    public Bar(PApplet p, int x, int y, int width, int height, int[] data){
+    public Bar(PApplet p, float x, float y, float width, float height, float[] data){
         this.parent = p;
 
         this.x = x;
@@ -24,7 +22,7 @@ public class Bar{
         this.data = data;
     }
 
-    public Bar(PApplet p, int x, int y, int width, int height, int[][] dataInc){
+    public Bar(PApplet p, float x, float y, float width, float height, float[][] dataInc){
         this.parent = p;
 
         this.x = x;
@@ -34,19 +32,19 @@ public class Bar{
         this.dataInc = dataInc;
     }
 
-    public void updateHeight(int h){
+    public void updateHeight(float h){
         this.height = h;
     }
 
-    public void updateWidth(int w){
+    public void updateWidth(float w){
         this.width = w;
     }
 
-    public void incrementalHeight(int dh){
+    public void incrementalHeight(float dh){
         this.height = this.height + dh;
     }
 
-    public void incrementalWidth(int dw){
+    public void incrementalWidth(float dw){
         this.width = this.width + dw;
     }
 
@@ -58,7 +56,7 @@ public class Bar{
         parent.rect(this.x, this.y, this.width, this.height);
     }
 
-    public void drawWithFrame(int index, int frameRate){
+    public void drawWithFrame(int index, float frameRate){
         for(int i = 0; i < frameRate; i++){
             updateHeight(dataInc[index][i]);
             parent.rect(this.x, this.y, this.width, this.height);
